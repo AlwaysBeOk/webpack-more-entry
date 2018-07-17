@@ -18,6 +18,10 @@ let baseConfig = {
       },
       //{test: /.css$/, use: ['style-loader', 'css-loader']},/*解析css, 并把css添加到html的style标签里*/
       {
+        test: require.resolve('zepto'),
+        use: "imports-loader?this=>window"  //解决zepto 未模块化 this指向问题
+      },
+      {
         test: /.css$/,
         use: ExtractTextPlugin.extract({/*解析css, 并把css变成文件通过link标签引入*/
           fallback: 'style-loader',
