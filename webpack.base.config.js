@@ -39,7 +39,27 @@ let baseConfig = {
       },
       {
         test: /.(jpg|png|gif|svg)$/,
-        use: ['url-loader?limit=819&name=./images/[name].[ext]&publicPath=']
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: "[name].[ext]",
+              publicPath: "../images/",
+              outputPath: "images/"
+            }
+          }
+        ]
+      },
+      {
+        test: /\.html$/,
+        use: [{
+          loader: 'html-loader',    //打包html中img标签中src的图片
+          options: {
+            minimize: true,
+            removeComments: false,
+            collapseWhitespace: false
+          }
+        }]
       },
       {
         test: /\.(sass|scss)$/,
